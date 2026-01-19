@@ -11,21 +11,46 @@ export function addCommands(this:SelectUtils){
                 new SampleModal(this.app).open();
             }
         });
-        // This adds an editor command that can perform some operation on the current editor instance
+        // TODO: Document commands
         this.addCommand({
             id: 'paragraph-select-next',
             name: 'Select Next Paragraph',
+            icon:'arrow-down-wide-narrow',
             editorCallback: (editor: Editor, view: MarkdownView) => {
-                new Notice("Not Implemented");
                 let start = editor.getCursor("anchor");
-                let end:EditorPosition = {ch:0, line:start.line+1};
+                let end:EditorPosition = editor.getCursor("head")
                 const max = editor.lineCount();
+                // Skip empty lines
+                while(!editor.getLine(end.line).trim()){
+                    end.line++;
+                    if(end.line == max)
+                        return; //Failed to find a next paragraph
+                }
+                // TODO: Finish command
                 for(; end.line<max; end.line++){
                     if(!editor.getLine(end.line).trim()){
                         break;
                     }
                 }
                 editor.setSelection(start, end);
+            }
+        });
+
+        this.addCommand({
+            id: 'reverse-select',
+            name: 'Reverse Current Selection',
+            icon: 'arrow-up-down',
+            editorCallback: (editor: Editor, view: MarkdownView) => {
+                editor.setSelection(editor.getCursor("head"), editor.getCursor("anchor"));
+            }
+        });
+
+        this.addCommand({
+            id: 'select-section',
+            name: 'Select Heading Section',
+            icon: '',
+            editorCallback: (editor: Editor, view: MarkdownView) => {
+                new Notice("Not Implemented");
             }
         });
         // This adds a complex command that can check whether the current state of the app allows execution of the command
