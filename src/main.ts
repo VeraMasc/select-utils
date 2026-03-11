@@ -10,17 +10,14 @@ export default class SelectUtils extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		// This creates an icon in the left ribbon.
-		this.addRibbonIcon('dice', 'Sample', (evt: MouseEvent) => {
-			// Called when the user clicks the icon.
-			new Notice('Selector Utils! WIP');
-		});
+		// // This creates an icon in the left ribbon.
+		// this.addRibbonIcon('dice', 'Sample', (evt: MouseEvent) => {
+		// 	// Called when the user clicks the icon.
+		// 	new Notice('Selector Utils! WIP');
+		// });
 
 		addCommands.call(this);
 
-		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
-		const statusBarItemEl = this.addStatusBarItem();
-		statusBarItemEl.setText('Status bar text');
 
 
 		// This adds a settings tab so the user can configure various aspects of the plugin

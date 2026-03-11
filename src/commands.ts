@@ -82,7 +82,7 @@ export class SampleModal extends Modal {
 
 	onOpen() {
 		let {contentEl} = this;
-		contentEl.setText('Woah!');
+		// contentEl.setText('Woah!');
 	}
 
 	onClose() {
